@@ -1,5 +1,7 @@
 const Cita = require("../models/Cita");
 const Dientes = require("../models/Diente");
+const Doctores = require("../models/Doctores");
+const Paciente = require("../models/Paciente");
 const RegistrarTratamientos = require("../models/RegistrarTratamientos");
 const TipoTratamiento = require("../models/TipoTratamiento");
 const TratamientoDiente = require("../models/TratamientoDiente");
@@ -11,7 +13,12 @@ exports.todosTratamientos = async(req, res) => {
   try {
     const tratamientos = await RegistrarTratamientos.findAll({
       include:[{
-        model: Cita
+        model: Cita,
+        include:[{
+          model: Doctores,
+        },{
+          model: Paciente,
+        }]
       },{
         model: TratamientoDiente,
         include:[{
@@ -52,7 +59,12 @@ exports.obtenerTratamientosPorCita = async (req, res) => {
       // where: { CitaId: idCita },
       include: [
         {
-          model: Cita
+          model: Cita,
+          include: [{
+            model: Doctores,
+          },{
+            model: Paciente,
+          }]
           
         },{
           model: TratamientoDiente,
