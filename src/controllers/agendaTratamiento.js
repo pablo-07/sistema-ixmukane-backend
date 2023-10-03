@@ -131,7 +131,7 @@ exports.registrarTratamientos = async(req, res) => {
     // Actualizar el total en el registro de tratamiento
     await registrarTratamiento.update({ total });
 
-    res.status(201).json({ mensaje: 'Tratamientos registrados con éxito' });
+    res.status(201).json({ mensaje: 'Tratamientos registrados con éxito', registrarTratamiento });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: error });
