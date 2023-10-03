@@ -20,8 +20,13 @@ exports.mostrar = async (req, res) => {
 };
 
 
+
 exports.createCita = async (req, res) => {
     const { estadoCita, fechaCita, horaInicioCita, horaFinalCita, motivoConsulta, paciente_idPaciente, doctores_idDoctor } = req.body
+    
+    const maxNumeroCita = await Cita.max('numeroCita');
+    const newNumeroCita = maxNumeroCita ? maxNumeroCita + 1 : 1;
+
     try {
         const verificarPaciente = await Paciente.findByPk(paciente_idPaciente)
         if(!verificarPaciente)
@@ -37,7 +42,10 @@ exports.createCita = async (req, res) => {
                 message:'No existe Doctor'
             })
         }
+        
         const cita = await Cita.create({
+            numeroCita: newNumeroCita,
+
             estadoCita,
             fechaCita,
             horaInicioCita,
