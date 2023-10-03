@@ -5,6 +5,7 @@ const NotaTipoTratamiento = require('./NotaTipoTratamiento')
 const FichaClinica = require('./FichaClinica');
 const Doctores = require('./Doctores');
 const HistorialClinico = require('./HistorialClinico');
+const Paciente = require('./Paciente');
 
 const Cita = sequelize.define('Cita', {
     idCita: {
@@ -38,6 +39,11 @@ const Cita = sequelize.define('Cita', {
       type: DataTypes.STRING(50),
       allowNull: false,
       comment: 'Motivo de la consulta del paciente'
+    },
+    numeroCita: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      comment: "Numero de la cita automatico"
     }
   }, {
     tableName: 'cita',
@@ -45,6 +51,7 @@ const Cita = sequelize.define('Cita', {
   });
   
   // Definición de relaciones con otras tablas
+  Cita.belongsTo(Paciente, { foreignKey: 'paciente_idPaciente' });
   Cita.belongsTo(Doctores, { foreignKey: 'doctores_idDoctor' });
   Cita.belongsTo(FichaClinica, { foreignKey: 'fichaClinica_idFichaClinica' });
   Cita.belongsTo(NotaTipoTratamiento, { foreignKey: 'notaTipoTratamiento_idNotaTipoTratamiento' });
