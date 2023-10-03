@@ -15,8 +15,9 @@ const Cita = sequelize.define('Cita', {
       comment: "Codigo unico de identificacion"
     },
     estadoCita: {
-      type: DataTypes.STRING(9),
+      type: DataTypes.STRING,
       allowNull: false,
+      defaultValue: 'asignado',
       comment: 'Estado de la cita programada'
     },
     fechaCita: {

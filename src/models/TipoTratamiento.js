@@ -23,7 +23,5 @@ const TipoTratamiento = sequelize.define('TipoTratamiento', {
     timestamps: false // Si no necesitas timestamps created_at y updated_at
   });
   
-  // Definición de relaciones con otras tablas
-  TipoTratamiento.belongsTo(TratamientoDiente, { foreignKey: 'tratamientoDiente_idTratamientoDiente' });
-  
+ 
   module.exports = TipoTratamiento;

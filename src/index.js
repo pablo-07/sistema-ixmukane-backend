@@ -21,6 +21,7 @@ const TratamientoDiente = require('./models/TratamientoDiente')
 const Pago = require('./models/Pago')
 const PagoTratamiento = require('./models/PagoTratamiento')
 const TipoTratamiento = require('./models/TipoTratamiento')
+const RegistrarTratamientos = require('./models/RegistrarTratamientos')
 
 
 //import passport middleware
@@ -56,6 +57,8 @@ const doctoresRoutes = require('./routes/doctores.routes');
 const tipoTratamientoRoutes = require('./routes/tipoTratamiento.routes');
 const paciente = require ('./routes/paciente.routes');
 const cita = require ('./routes/cita.routes');
+// const Dientes = require("./models/Diente");
+const agendatratamiento = require('./routes/agendaTratamiento.routes')
 //initialize routes
 app.use("/api", authRoutes);
 app.use("/api", especialidadesRoutes);
@@ -63,27 +66,49 @@ app.use("/api", doctoresRoutes);
 app.use("/api", tipoTratamientoRoutes);
 app.use("/api", paciente);
 app.use("/api", cita);
+app.use('/api', agendatratamiento);
 
 //arranca
 const appStart = async () => {
 
   try {
     // const Users = require("./models/Users.js") 
+
+    // await Users.sync({force: true})
+    // await NotaTipoTratamiento.sync({force: true})
+    // await HistorialClinico.sync({force: true})
+    // await Paciente.sync({force: true})
+    // await Especialidad.sync({force: true})
+    // await Dientes.sync({force: true})
+    // await Cita.sync({force: true})
+    // await ReferenciasMedicas.sync({force: true})
+    // await TratamientoDiente.sync({force: true})
+    // await TipoTratamiento.sync({force: true})
+    // await Doctores.sync({force: true})
+    // await FichaClinica.sync({force: true})
+    // await Observacion.sync({force: true})
+    // await RegistrarTratamientos.sync({force: true})
+    // await FichaObservacion.sync({force: true})
+    // await Pago.sync({force: true})
+    // await PagoTratamiento.sync({force: true})
+
+
     await Users.sync()
+    await NotaTipoTratamiento.sync()
+    await HistorialClinico.sync()
     await Paciente.sync()
-    await FichaClinica.sync()
+    await Especialidad.sync()
+    await Cita.sync()
     await ReferenciasMedicas.sync()
+    await TratamientoDiente.sync()
+    await TipoTratamiento.sync()
+    await Doctores.sync()
+    await RegistrarTratamientos.sync()
+    await FichaClinica.sync()
     await Observacion.sync()
     await FichaObservacion.sync()
-    await Cita.sync()
-    await NotaTipoTratamiento.sync()
-    await Doctores.sync()
-    await Especialidad.sync()
-    await HistorialClinico.sync()
-    await TratamientoDiente.sync()
     await Pago.sync()
     await PagoTratamiento.sync()
-    await TipoTratamiento.sync()
 
     
 
