@@ -1,4 +1,4 @@
-const Cita = require('../models/Cita')
+const Cita = require('../models/Cita');
 const Paciente = require('../models/Paciente');
 const Doctores = require('../models/Doctores');
 
@@ -6,8 +6,12 @@ exports.mostrar = async (req, res) => {
     try {
         const mostrarTodos = await Cita.findAll({
             include: [{
-                model: Paciente
-            }]
+                model: Paciente,
+            },
+            {
+                model: Doctores
+            }
+        ]
         })
         if(mostrarTodos.length === 0){
         return res.status(404).json({
@@ -22,7 +26,7 @@ exports.mostrar = async (req, res) => {
 
 
 exports.createCita = async (req, res) => {
-    const { estadoCita, fechaCita, horaInicioCita, horaFinalCita, motivoConsulta, paciente_idPaciente, doctores_idDoctor } = req.body
+    const { paciente_idPaciente, estadoCita, fechaCita, horaInicioCita, horaFinalCita, motivoConsulta, doctores_idDoctor } = req.body
     
     const maxNumeroCita = await Cita.max('numeroCita');
     const newNumeroCita = maxNumeroCita ? maxNumeroCita + 1 : 1;
@@ -45,13 +49,13 @@ exports.createCita = async (req, res) => {
         
         const cita = await Cita.create({
             numeroCita: newNumeroCita,
-
+            
+            paciente_idPaciente,
             estadoCita,
             fechaCita,
             horaInicioCita,
             horaFinalCita,
             motivoConsulta,
-            paciente_idPaciente,
             doctores_idDoctor
         })
     
@@ -65,7 +69,7 @@ exports.createCita = async (req, res) => {
 exports.editarCita = async (req, res) => {
         try {
             const { id } = req.params;
-            const { estadoCita, fechaCita, horaInicioCita, horaFinalCita, motivoConsulta, paciente_idPaciente, doctores_idDoctor } = req.body;
+            const { paciente_idPaciente, estadoCita, fechaCita, horaInicioCita, horaFinalCita, motivoConsulta, doctores_idDoctor } = req.body;
             
             const existenciaCita = await Cita.findByPk(id)
             if(!existenciaCita){
@@ -89,12 +93,12 @@ exports.editarCita = async (req, res) => {
     
             
             await existenciaCita.update({
+                paciente_idPaciente,
                 estadoCita,
                 fechaCita,
                 horaInicioCita,
                 horaFinalCita,
                 motivoConsulta,
-                paciente_idPaciente,
                 doctores_idDoctor
             })
         
@@ -104,23 +108,23 @@ exports.editarCita = async (req, res) => {
         }
     }
 
-exports.deleteCita = async (req, res) => {
-        try {
-            const { id } = req.params;
-            const buscarCita = await Cita.findByPk(id);
-            if(!buscarCita){
-                return res.status(404).json({
-                    message: "No se encuentra doctor"
-                })
-            }
+// exports.deleteCita = async (req, res) => {
+//         try {
+//             const { id } = req.params;
+//             const buscarCita = await Cita.findByPk(id);
+//             if(!buscarCita){
+//                 return res.status(404).json({
+//                     message: "No se encuentra doctor"
+//                 })
+//             }
     
-            await buscarCita.destroy();
+//             await buscarCita.destroy();
     
-            res.status(201).json({
-                message: "Doctor eliminado"
-            })
+//             res.status(201).json({
+//                 message: "Doctor eliminado"
+//             })
     
-        } catch (error) {
-            console.log(error)
-        }
-}
+//         } catch (error) {
+//             console.log(error)
+//         }
+// }
