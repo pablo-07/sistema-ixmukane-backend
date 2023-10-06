@@ -1,5 +1,17 @@
 const Dientes = require("../models/Diente");
 
+exports.todosDientes = async(req, res)=>{
+  try {
+    const dientes = await Dientes.findAll();
+    if(!dientes){
+      res.status(401).send({message: "No se encontraron dietas"});
+    }
+
+    return res.status(200).json({dientes})
+  } catch (error) {
+    console.log(error)
+  }
+}
 exports.addDientes = async (req, res) => {
     try {
       const { nombre } = req.body;

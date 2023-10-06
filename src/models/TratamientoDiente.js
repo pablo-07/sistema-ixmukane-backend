@@ -44,10 +44,19 @@ const TratamientoDiente = sequelize.define('TratamientoDiente', {
   
   TratamientoDiente.belongsTo(Dientes, { foreignKey: 'diente_id_diente', targetKey: 'idDiente' });
 
+  // TratamientoDiente.hasMany(TipoTratamiento, {
+  //   foreignKey: 'tratamiento_idtratamiento', // Esto debe coincidir con el nombre de la clave foránea en TipoTratamiento
+  //   // as: 'tiposTratamiento' // Opcional, puedes usar esto para acceder a los tipos de tratamiento desde TratamientoDiente
+  // });
+  
+  // En el modelo TratamientoDiente
+TratamientoDiente.belongsTo(TipoTratamiento, {
+  foreignKey: 'tratamiento_idtratamiento', 
+});
 
-   // Definición de relaciones con otras tablas
-   TipoTratamiento.hasMany(TratamientoDiente, {foreignKey: 'tratamiento_idtratamiento', targetKey: 'idTratamiento'});
-   TratamientoDiente.belongsTo(TipoTratamiento, {foreignKey: 'tratamiento_idtratamiento', targetKey: 'idTratamiento'});
-   
-
+// También podrías configurar una relación inversa en TipoTratamiento si es necesario
+TipoTratamiento.hasMany(TratamientoDiente, {
+  foreignKey: 'tratamiento_idtratamiento', 
+});
+ 
   module.exports = TratamientoDiente;

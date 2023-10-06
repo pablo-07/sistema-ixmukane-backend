@@ -3,6 +3,7 @@ const { DataTypes } = require('sequelize');
 const { sequelize } = require('../db/index')
 const Especialidad = require('./Especialiadad');
 const Cita = require('./Cita');
+const TratamientoDiente = require('./TratamientoDiente');
 
 const RegistrarTratamientos = sequelize.define('RegistrarTratamientos', {
     idRegistrarTratamiento: {
@@ -18,11 +19,21 @@ const RegistrarTratamientos = sequelize.define('RegistrarTratamientos', {
     }
   }, {
     tableName: 'registrar_tratamientos',
-    timestamps: false // Si no necesitas timestamps created_at y updated_at
+    
+    timestamps: true // Si no necesitas timestamps created_at y updated_at
   });
   
   // Definición de relaciones con otras tablas
   RegistrarTratamientos.belongsTo(Cita, { foreignKey: 'cita_idcita', targetKey: 'idCita' });
+// En el modelo RegistrarTratamientos
+// RegistrarTratamientos.hasMany(TratamientoDiente, {
+//   foreignKey: 'registrar_idregistrar', // Ajusta esta clave foránea según tu esquema de base de datos
+// });
+
+// TratamientoDiente.hasMany(TipoTratamiento, {
+//   foreignKey: 'tratamiento_idtratamiento', // Esto debe coincidir con el nombre de la clave foránea en TipoTratamiento
+//   // as: 'tiposTratamiento' // Opcional, puedes usar esto para acceder a los tipos de tratamiento desde TratamientoDiente
+// });
 
   
   

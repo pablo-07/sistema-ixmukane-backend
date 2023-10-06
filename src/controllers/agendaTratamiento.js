@@ -56,6 +56,7 @@ exports.obtenerTratamientosPorCita = async (req, res) => {
 
     // Buscar el registro de tratamiento asociado a la cita
     const registrarTratamiento = await RegistrarTratamientos.findAll({
+      order:[['createdAt', 'DESC']],
       // where: { CitaId: idCita },
       include: [
         {
