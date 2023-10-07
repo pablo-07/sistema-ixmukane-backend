@@ -54,8 +54,8 @@ const Cita = sequelize.define('Cita', {
   // Definición de relaciones con otras tablas
   Cita.belongsTo(Paciente, { foreignKey: 'paciente_idPaciente' });
   Cita.belongsTo(Doctores, { foreignKey: 'doctores_idDoctor' });
-  Cita.belongsTo(FichaClinica, { foreignKey: 'fichaClinica_idFichaClinica' });
-  Cita.belongsTo(NotaTipoTratamiento, { foreignKey: 'notaTipoTratamiento_idNotaTipoTratamiento' });
-  Cita.belongsTo(HistorialClinico, {foreignKey:'historialClinico_idHistorialClinico'});
+  // Cita.belongsTo(FichaClinica, { foreignKey: 'fichaClinica_idFichaClinica' });
+  // Cita.belongsTo(NotaTipoTratamiento, { foreignKey: 'notaTipoTratamiento_idNotaTipoTratamiento' });
+  // Cita.belongsTo(HistorialClinico, {foreignKey:'historialClinico_idHistorialClinico'});
   
   module.exports = Cita;

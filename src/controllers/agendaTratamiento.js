@@ -93,6 +93,7 @@ exports.registrarTratamientos = async(req, res) => {
   try {
     const { idCita, dientes } = req.body;
 
+
     // Buscar la cita por su ID
     const cita = await Cita.findByPk(idCita);
     if (!cita) {
@@ -137,6 +138,8 @@ exports.registrarTratamientos = async(req, res) => {
 
         // Sumar el precio del tratamiento al total
         total += tipoTratamiento.precio;
+
+
       }
     }
 
@@ -148,5 +151,43 @@ exports.registrarTratamientos = async(req, res) => {
     console.error(error);
     res.status(500).json({ error: error });
   }
-}
+};
+
+
+// Controlador para registrar un pago
+exports.registrarPago = async (req, res) => {
+  
+  try {
+    const { idRegistrarTratamiento } = req.params;
+    const { montoPagado } = req.body;
+
+      // Buscar el registro de tratamiento por su ID
+      const registrarTratamiento = await RegistrarTratamientos.findByPk(idRegistrarTratamiento);
+
+      if (!registrarTratamiento) {
+          return res.status(404).json({ message: 'Registro de tratamiento no encontrado' });
+      }
+
+      // Calcular el saldo pendiente después del pago
+      registrarTratamiento.diferencia = registrarTratamiento.total - (registrarTratamiento.montoPagado + montoPagado);
+      
+      // Actualizar el monto pagado
+      registrarTratamiento.montoPagado += montoPagado;
+
+      // Verificar si el tratamiento ya está pagado por completo
+      if (registrarTratamiento.montoPagado >= registrarTratamiento.total) {
+    registrarTratamiento.pagado = true;
+  }
+
+      
+// Guardar los cambios en la base de datos
+  await registrarTratamiento.save();
+
+
+
+      res.status(200).json({ mensaje: 'Pago registrado con éxito', registrarTratamiento });
+  } catch (error) {
+      console.error(error);
+  }
+};
 

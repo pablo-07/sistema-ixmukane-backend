@@ -15,13 +15,13 @@
 
 
 const sequelize = new Sequelize(
-  "dientes", //dbname
+  "sistemadental", //dbname
   "postgres", //username
-  "Danny2023", //password
+  "elbicho.7", //password
   {
     host: "localhost",
     dialect: "postgres",
-    port:5433,
+    port:5432,
   }
   //   "postgres://usuario:contraseña@localhost:5432/nombre_de_la_base_de_datos"
 );

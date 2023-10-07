@@ -14,7 +14,22 @@ const RegistrarTratamientos = sequelize.define('RegistrarTratamientos', {
     total: {
         type: DataTypes.FLOAT,
         allowNull: true,
-        comment: 'total de factura de dientes'
+        comment: 'Total de factura de dientes'
+    },
+    montoPagado: {
+      type: DataTypes.FLOAT,
+      allowNull: true,
+      comment: 'Monto pagado por el paciente'
+  },
+  diferencia: {
+      type: DataTypes.FLOAT,
+      allowNull: true,
+      comment: 'Diferencia entre montoPagado y total'
+  },
+    pagado: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
+      defaultValue: false
     }
   }, {
     tableName: 'registrar_tratamientos',
