@@ -103,7 +103,9 @@ exports.registrarTratamientos = async(req, res) => {
 
     // Crear un registro de tratamiento asociado a la cita
     const registrarTratamiento = await RegistrarTratamientos.create({ 
-      cita_idcita: cita.idCita 
+      cita_idcita: cita.idCita,
+      total: 0,
+      diferencia: 0,
     });
 
     let total = 0;
@@ -139,13 +141,14 @@ exports.registrarTratamientos = async(req, res) => {
 
         // Sumar el precio del tratamiento al total
         total += tipoTratamiento.precio;
-
-
       }
     }
 
     // Actualizar el total en el registro de tratamiento
-    await registrarTratamiento.update({ total });
+    await registrarTratamiento.update({
+      total,
+      diferencia: total
+    });
 
     res.status(201).json({ mensaje: 'Tratamientos registrados con éxito', registrarTratamiento });
   } catch (error) {
@@ -169,11 +172,25 @@ exports.registrarPago = async (req, res) => {
           return res.status(404).json({ message: 'Registro de tratamiento no encontrado' });
       }
 
+      // Verificar si el monto pagado es mayor que cero
+      if (montoPagado <= 0) {
+        return res.status(400).json({ message: 'El monto pagado debe ser mayor que cero' });
+        }
+  
+        // Verificar si el monto pagado es mayor que el saldo pendiente
+        if (montoPagado > registrarTratamiento.diferencia) {
+        return res.status(400).json({ message: 'El monto pagado no puede ser mayor que el saldo pendiente' });
+        }
+
       // Calcular el saldo pendiente después del pago
       registrarTratamiento.diferencia = registrarTratamiento.total - (registrarTratamiento.montoPagado + montoPagado);
       
       // Actualizar el monto pagado
       registrarTratamiento.montoPagado += montoPagado;
+
+      
+
+      
 
       // Verificar si el tratamiento ya está pagado por completo
       if (registrarTratamiento.montoPagado >= registrarTratamiento.total) {

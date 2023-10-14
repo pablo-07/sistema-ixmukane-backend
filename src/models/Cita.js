@@ -22,7 +22,7 @@ const Cita = sequelize.define('Cita', {
       comment: 'Estado de la cita programada'
     },
     fechaCita: {
-      type: DataTypes.DATE,
+      type: DataTypes.DATEONLY,
       allowNull: false,
       comment: 'Fecha programada para que el paciente acuda a la cita'
     },
@@ -45,7 +45,8 @@ const Cita = sequelize.define('Cita', {
       type: DataTypes.INTEGER,
       allowNull: false,
       comment: "Numero de la cita automatico"
-    }
+    },
+    
   }, {
     tableName: 'cita',
     timestamps: false // Si no necesitas timestamps created_at y updated_at

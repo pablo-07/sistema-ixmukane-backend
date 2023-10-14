@@ -1,21 +1,21 @@
 const Dientes = require("../models/Diente");
 
-exports.mostrar = async (req, res) => {
-  try {
-      const mostrarTodos = await Dientes.findAll({
-          include: [{
-              model: Dientes
-          }]
-      })
-      if(mostrarTodos.length === 0){
-      return res.status(404).json({
-  message:'No hay resultado'
-})
-      }res.json(mostrarTodos)
-  } catch (error) {
-      console.log(error)
-  }
-};
+// exports.mostrar = async (req, res) => {
+//   try {
+//       const mostrarTodos = await Dientes.findAll({
+//           include: [{
+//               model: Dientes
+//           }]
+//       })
+//       if(mostrarTodos.length === 0){
+//       return res.status(404).json({
+//   message:'No hay resultado'
+// })
+//       }res.json(mostrarTodos)
+//   } catch (error) {
+//       console.log(error)
+//   }
+// };
 
 
 exports.todosDientes = async(req, res)=>{

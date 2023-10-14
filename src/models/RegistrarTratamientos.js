@@ -31,11 +31,28 @@ const RegistrarTratamientos = sequelize.define('RegistrarTratamientos', {
       type: DataTypes.BOOLEAN,
       allowNull: true,
       defaultValue: false
+    },
+    createdAt: {
+      type: DataTypes.DATEONLY,
+      allowNull: false,
+      comment: "fecha de creación del registro",
+      // get() {
+      //   return this.getDataValue('createdAt').toISOString().slice(0,10);
+      // }
+    },
+    updatedAt: {
+      type: DataTypes.DATEONLY,
+      allowNull: false,
+      comment: "fecha de actualización del registro",
+      // get() {
+      //   return this.getDataValue('updatedAt').toISOString().slice(0,10);
+      // }
     }
   }, {
     tableName: 'registrar_tratamientos',
     
     timestamps: true // Si no necesitas timestamps created_at y updated_at
+    
   });
   
   // Definición de relaciones con otras tablas

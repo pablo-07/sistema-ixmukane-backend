@@ -8,7 +8,7 @@ router.get('/trata/:id', obtenerTratamientosPorCita)
 
 router.post('/agtratamient', registrarTratamientos)
 
-router.get('/getdientes', mostrar);
+// router.get('/getdientes', mostrar);
 
 
 router.get('/getDientes', todosDientes);

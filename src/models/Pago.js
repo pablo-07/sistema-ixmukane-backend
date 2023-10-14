@@ -9,7 +9,7 @@ const Pago = sequelize.define('Pago', {
       primaryKey: true
     },
     fecha: {
-      type: DataTypes.DATE,
+      type: DataTypes.DATEONLY,
       allowNull: false
     },
     abono: {
@@ -19,6 +19,22 @@ const Pago = sequelize.define('Pago', {
     saldo: {
       type: DataTypes.INTEGER,
       allowNull: true
+    },
+    createdAt: {
+      type: DataTypes.DATEONLY,
+      allowNull: false,
+      comment: "fecha de creación del registro",
+      // get() {
+      //   return this.getDataValue('createdAt').toISOString().slice(0,10);
+      // }
+    },
+    updatedAt: {
+      type: DataTypes.DATEONLY,
+      allowNull: false,
+      comment: "fecha de actualización del registro",
+      // get() {
+      //   return this.getDataValue('updatedAt').toISOString().slice(0,10);
+      // }
     }
   }, {
     tableName: 'pago',
