@@ -6,6 +6,7 @@ const { sequelize } = require('../db/index')
 const Users = sequelize.define('users', {
     user_id: {
       type: DataTypes.INTEGER,
+      allowNull: false,
       autoIncrement: true,
       primaryKey: true,
       comment: "Codigo unico de identificacion"

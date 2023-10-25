@@ -17,10 +17,26 @@ const TipoTratamiento = sequelize.define('TipoTratamiento', {
     precio: {
       type: DataTypes.INTEGER,
       allowNull: false,
+    },
+    createdAt: {
+      type: DataTypes.DATEONLY,
+      allowNull: false,
+      comment: "fecha de creación del registro",
+      // get() {
+      //   return this.getDataValue('createdAt').toISOString().slice(0,10);
+      // }
+    },
+    updatedAt: {
+      type: DataTypes.DATEONLY,
+      allowNull: false,
+      comment: "fecha de actualización del registro",
+      // get() {
+      //   return this.getDataValue('updatedAt').toISOString().slice(0,10);
+      // }
     }
   }, {
     tableName: 'tipoTratamiento',
-    timestamps: false // Si no necesitas timestamps created_at y updated_at
+    timestamps: true // Si no necesitas timestamps created_at y updated_at
   });
   
   //  // Definición de relaciones con otras tablas
@@ -34,4 +50,4 @@ const TipoTratamiento = sequelize.define('TipoTratamiento', {
   //  TratamientoDiente.belongsTo(RegistrarTratamientos, {foreignKey: 'registrar_idregistrar', targetKey: 'idRegistrarTratamiento'});
    
 
-  module.exports = TipoTratamiento;
+  module.exports = TipoTratamiento; 

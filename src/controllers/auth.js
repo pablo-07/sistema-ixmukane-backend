@@ -154,7 +154,24 @@ exports.logout = async (req, res) => {
 
 
 exports.update = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { users, password, rol, status } = req.body;
 
+    const existenciaUsuario = await Users.findByPk(id)
+    if(!existenciaTipoTratamiento){
+        return res.status(404).json({
+            message: "Tratamiento no encontrado"
+        })
+    }
+    await existenciaUsuario.update({
+      users, password, rol, status
+    })
+
+    res.json(existenciaUsuario)
+} catch (error) {
+    console.log(error)
+}
 };
 
 exports.deleteUser = async (req, res) => {

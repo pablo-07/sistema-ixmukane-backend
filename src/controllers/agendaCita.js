@@ -1,6 +1,8 @@
 const Cita = require('../models/Cita');
 const Paciente = require('../models/Paciente');
 const Doctores = require('../models/Doctores');
+const { Op } = require('sequelize');
+
 
 exports.mostrar = async (req, res) => {
     try {
@@ -107,6 +109,62 @@ exports.editarCita = async (req, res) => {
             console.log(error)
         }
     }
+
+
+// Controlador para obtener citas dentro de un rango de fechas
+exports.getCitasByDateRange = async (req, res) => {
+    const { startDate, endDate } = req.body;
+  
+    try {
+      const citas = await Cita.findAll({
+        where: {
+          fechaCita: {
+            [Op.between]: [startDate, endDate],
+          },
+        },
+        include: [Paciente, Doctores], // Incluye relaciones si es necesario
+      });
+  
+      if (citas.length === 0) {
+        return res.status(404).json({
+          message: 'No hay citas en el rango de fechas seleccionado',
+        });
+      }
+  
+      res.json(citas);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Error al obtener citas por rango de fechas.');
+    }
+  };
+
+
+  // Controlador para obtener citas de un día específico
+exports.getCitasByDay = async (req, res) => {
+    const { fecha } = req.params; // Puedes pasar la fecha como parámetro en la URL o en el cuerpo de la solicitud
+  
+    try {
+      const citas = await Cita.findAll({
+        where: {
+          fechaCita: fecha,
+        },
+        include: [Paciente, Doctores], // Incluye relaciones si es necesario
+      });
+  
+      if (citas.length === 0) {
+        return res.status(404).json({
+          message: 'No hay citas en el día seleccionado',
+        });
+      }
+  
+      res.json(citas);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Error al obtener citas por día.');
+    }
+  };
+  
+
 
 // exports.deleteCita = async (req, res) => {
 //         try {
