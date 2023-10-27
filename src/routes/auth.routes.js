@@ -28,7 +28,7 @@ router.get("/get-users", userAuth, adminAuth, getUser)
 router.get('/users/:id', getUserId);
 
 //edit users
-
+router.put("/editarUsuario/:id", update)
 
 //delete users
 

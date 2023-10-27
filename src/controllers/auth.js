@@ -159,7 +159,7 @@ exports.update = async (req, res) => {
     const { users, password, rol, status } = req.body;
 
     const existenciaUsuario = await Users.findByPk(id)
-    if(!existenciaTipoTratamiento){
+    if(!existenciaUsuario){
         return res.status(404).json({
             message: "Tratamiento no encontrado"
         })

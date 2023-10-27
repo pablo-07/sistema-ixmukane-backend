@@ -1,23 +1,12 @@
-// const { Pool } = require('pg');
-// const pool = new Pool({
-//     user: 'postgres',
-//     host: 'localhost',
-//     database: 'login2',
-//     password: 'Danny2023',
-//     port: 5433,
-// });
-
-// module.exports = {
-//     query: (text, params) => pool.query(text, params),
-// }
+require ('dotenv').config();
 
  const { Sequelize } =  require("sequelize");
 
 
 const sequelize = new Sequelize(
-  "sistemadental", //dbname
-  "postgres", //username
-  "elbicho.7", //password
+  process.env.DB_NAME, //dbname
+  process.env.DB_USER, //username
+  process.env.DB_PASSWORD, //password
   {
     host: "localhost",
     dialect: "postgres",
