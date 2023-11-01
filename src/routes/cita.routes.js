@@ -1,8 +1,10 @@
 const {Router} = require ('express')
-const {mostrar, createCita, editarCita, getCitasByDateRange, getCitasByDay} = require ('../controllers/agendaCita')
+const {mostrar, createCita, editarCita, getCitasByDateRange, getCitasByDay, getNumeroCita} = require ('../controllers/agendaCita')
 const router = Router()
 
 router.get('/getCita', mostrar)
+
+router.get('/getNumeroCita', getNumeroCita)
 
 router.get('/citasPorDia', getCitasByDay)
 

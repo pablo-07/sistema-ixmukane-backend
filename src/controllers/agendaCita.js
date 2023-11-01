@@ -61,12 +61,37 @@ exports.createCita = async (req, res) => {
             doctores_idDoctor
         })
     
-        res.status(201).json(cita)
+        return res.status(201).json({message: 'Cita registrada exitosamente', cita}) 
     } catch (error) {
         console.log(error)
         
     }
-    }
+    };
+
+
+    exports.getNumeroCita = async (req, res) => {
+      try {
+        // Obtener el número de factura actual de la base de datos
+        const maxProNumber = await Cita.max('numeroCita');
+        const newProNumber = maxProNumber ? maxProNumber + 1 : 1;
+    
+        if (maxProNumber !== null) {
+          // Devolver el número de factura en la respuesta JSON
+          res.json({ numCita: newProNumber});
+        } else {
+          // Si no hay registros en la tabla, iniciar desde 1
+          res.json({ numCita: 1 });
+        }
+      } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Error al obtener el número de factura' });
+      }
+    };
+  
+
+
+
+
 
 exports.editarCita = async (req, res) => {
         try {

@@ -1,5 +1,5 @@
 const {Router} = require ('express')
-const { registrarTratamientos, todosTratamientos, obtenerTratamientosPorCita, registrarPago } = require('../controllers/agendaTratamiento')
+const { registrarTratamientos, todosTratamientos, obtenerTratamientosPorCita, registrarPago, generarFactura } = require('../controllers/agendaTratamiento')
 const { mostrar, addDientes, todosDientes } = require('../controllers/diente')
 const router = Router()
 
@@ -15,6 +15,8 @@ router.get('/getDientes', todosDientes);
 router.post('/dientes', addDientes);
 
 router.put('/registrarPago/:idRegistrarTratamiento', registrarPago);
+
+router.get('/factura/:idRegistrarTratamiento', generarFactura)
 
 
 module.exports = router;
