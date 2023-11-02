@@ -27,27 +27,12 @@ const TratamientoDiente = sequelize.define('TratamientoDiente', {
     timestamps: false // Si no necesitas timestamps created_at y updated_at
   });
   
-  // Definición de relaciones con otras tablas
-//   TratamientoDiente.belongsTo(Cita, { foreignKey: 'cita_idCita' });
-//   TratamientoDiente.belongsTo(HistorialClinico, { foreignKey: 'historialClinico_idHistorialClinico' });
-
-//   Cita.hasMany(Dientes, {foreignKey: 'cita_id_cita', targetKey: 'idCita'});
-// Dientes.belongsTo(Cita, {foreignKey: 'cita_id_cita', targetKey: 'idCita'});
-  
-
-  // Dientes.hasMany(TratamientoDiente, {foreignKey: 'diente_id_diente', targetKey: 'idDiente'});
-  // TratamientoDiente.belongsTo(Dientes, {foreignKey: 'diente_id_diente', targetKey: 'idDiente'});
-
 
   RegistrarTratamientos.hasMany(TratamientoDiente, {foreignKey: 'registrar_idregistrar', targetKey: 'idRegistrarTratamiento'});
   TratamientoDiente.belongsTo(RegistrarTratamientos, {foreignKey: 'registrar_idregistrar', targetKey: 'idRegistrarTratamiento'});
   
   TratamientoDiente.belongsTo(Dientes, { foreignKey: 'diente_id_diente', targetKey: 'idDiente' });
 
-  // TratamientoDiente.hasMany(TipoTratamiento, {
-  //   foreignKey: 'tratamiento_idtratamiento', // Esto debe coincidir con el nombre de la clave foránea en TipoTratamiento
-  //   // as: 'tiposTratamiento' // Opcional, puedes usar esto para acceder a los tipos de tratamiento desde TratamientoDiente
-  // });
   
   // En el modelo TratamientoDiente
 TratamientoDiente.belongsTo(TipoTratamiento, {
