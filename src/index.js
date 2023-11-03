@@ -34,7 +34,7 @@ app.use(cookieParser());
 // app.use(cors());
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "sistema-ixmukane-frontend-production.up.railway.app",
     credentials: true,
   })
 );
