@@ -34,7 +34,7 @@ app.use(cookieParser());
 // app.use(cors());
 app.use(
   cors({
-    origin: "sistema-ixmukane-frontend-production.up.railway.app",
+    origin: "https://sistema-ixmukane-frontend-production.up.railway.app",
     credentials: true,
   })
 );
